@@ -1,0 +1,8 @@
+einops==0.6.1
+taming-transformers-rom1504==0.0.6
+omegaconf==2.3.0
+k-diffusion==0.0.16
+deepspeed==0.10.2
+timm==0.9.7
+transformers==4.33.1
+matplotlib

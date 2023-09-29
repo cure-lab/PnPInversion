@@ -1,0 +1,7 @@
+data
+__pycache__
+.vscode
+output
+*.csv
+*.out
+*.bash

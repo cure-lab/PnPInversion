@@ -1,0 +1,6 @@
+diffusers==0.17.1
+xformers==0.0.20
+transformers==4.30.2
+accelerate==0.20.3
+matplotlib
+salesforce-lavis

@@ -1,0 +1,5 @@
+diffusers==0.6.0
+transformers==4.19.2
+matplotlib
+omegaconf
+imageio
