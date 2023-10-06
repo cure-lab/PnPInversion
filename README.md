@@ -12,7 +12,7 @@ Keywords: Diffusion Model, Image Inversion, Image Editing
 <p align="center">
   <a href="">Project Page</a> |
   <a href="https://arxiv.org/abs/2310.01506">Arxiv</a> |
-  <a href="">Readpaper</a> |
+  <a href="https://readpaper.com/paper/4807149696887816193">Readpaper</a> |
   <a href="https://forms.gle/hVMkTABb4uvZVjme9">Benchmark</a> |
   <a href="https://github.com/cure-lab/DirectInversion">Code</a> |
   <a href="https://drive.google.com/file/d/1WWAvhsNYmLLSuN8neZ_lFEMVNn7ATJUs/view?usp=sharing">Video</a> |
@@ -355,6 +355,16 @@ More results can be found in the main paper.
 
 
 <span id="cite-us"></span>
+
+```
+@article{ju2023direct,
+  title={Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code},
+  author={Ju, Xuan and Zeng, Ailing and Bian, Yuxuan and Liu, Shaoteng and Xu, Qiang},
+  journal={arXiv preprint arXiv:2304.04269},
+  year={2023}
+}
+```
+
 
 ## 💖 Acknowledgement
 <span id="acknowledgement"></span>
