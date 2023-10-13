@@ -54,7 +54,7 @@ Previous inversion techniques attempted to find a unified solution in both the s
 ### Environment Requirement 🌍
 <span id="environment-requirement"></span>
 
-Since different models have different python environmnet requirements (e.g. diffusers' version), we list the environmnet in the folder "environment", detailed as follows:
+This is important!!! Since different models have different python environmnet requirements (e.g. diffusers' version), we list the environmnet in the folder "environment", detailed as follows:
 
 - p2p_requirements.txt: for models in `run_editing_p2p.py`, `run_editing_blended_latent_diffusion.py`, `run_editing_stylediffusion.py`, and `run_editing_edit_friendly_p2p.py`
 - instructdiffusion_requirements.txt: for models in `run_editing_instructdiffusion.py` and `run_editing_instructpix2pix.py`
