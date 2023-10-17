@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code">
+  <meta name="keywords" content="Diffusion Model, Image Inversion, Image Editing">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5ZVQZ7NHC"></script> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js_slide/fontawesome.all.min.js"></script>
+  <script src="./static/js_slide/bulma-carousel.min.js"></script>
+  <script src="./static/js_slide/bulma-slider.min.js"></script>
+  <script src="./static/js_slide/index.js"></script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <!-- Vendor Stylesheets -->
+  <!--=================js==========================-->
+  <link rel="stylesheet" href="./static/css/tab_gallery.css">
+  <link rel="stylesheet" href="./static/css/juxtapose.css">
+  <link rel="stylesheet" href="./static/css/image_card_fader.css">
+  <link rel="stylesheet" href="./static/css/image_card_slider.css">
+</head>
+<body>
+
+
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"><span style="color:#e1570c; font-weight: bold; font-style: italic"><strong>Direct Inversion</strong></span> : Boosting Diffusion-based Editing with 3 Lines of Code</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://juxuan27.github.io/">Xuan Ju</a><sup>12</sup>,</span>
+            <span class="author-block">
+              <a href="https://ailingzeng.site/">Ailing Zeng</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/TreastBean">Yuxuan Bian</a><sup>1</sup>,</span>
+            </span>
+            <span class="author-block">
+              <a href="https://www.shaotengliu.com/">Shaoteng Liu</a><sup>1</sup>,</span>
+            </span>
+            <span class="author-block">
+              <a href="https://cure-lab.github.io/">Qiang Xu</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>The Chinese University of Hong Kong <sup>2</sup>International Digital Economy Academy
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://readpaper.com/paper/4807149696887816193"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>ReadPaper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2310.01506"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://drive.google.com/file/d/1HGr4ETPa7w-08KKOMhfxhngzQ9Y9Nj4H/view?usp=sharing"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/cure-lab/DirectInversion"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>  
+              <!-- huggingface Link. -->
+              <!-- <span class="link-block">
+                <a href="https://huggingface.co/spaces/ChenyangSi/FreeU"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-huggingface"></i>
+                  </span>
+                  <span>Huggingface Demo</span>
+                  </a>
+              </span> -->
+              <!-- Code Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSftGgDwLLMwrad9pX3Odbnd4UXGvcRuXDkRp6BT1nPk8fcH_g/viewform"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--=================Teasers==========================-->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+      <!-- The expanding image container -->
+      <!-- <h2 class="title is-3">Text to Image</h2> -->
+      <div class="tab_container">
+        <!-- Close the image -->
+        <!-- <span onclick="this.parentElement.style.display='none'" class="closebtn">&times;</span> -->
+        <div id="juxtapose-embed-text" style="font-size: 1.3rem;font-family:'Lucida Calligraphy', Times, serif;text-align:center">
+          A gold plated bowl filled with <strong style="color:#00aaff";>fruit</strong> → A gold plated bowl filled with <strong style="color:#00aaff";>candy</strong>
+        </div>
+
+
+        <!-- Expanded image -->
+        <div id="juxtapose-embed" data-startingposition="30%" data-animate="true" class="juxtapose"
+          style="height: 512px; width: 1024px;">
+          
+        </div>
+
+        <div>
+          <div id="juxtapose-hidden"></div>
+        </div>
+        
+        <!-- Image text -->
+        <div id="imgtext"></div>
+      </div>
+
+      <!-- The grid: four columns -->
+      <div class="tab_row">
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_1.jpg" onclick="tab_gallery_click('1');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_2.jpg" onclick="tab_gallery_click('2');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_3.jpg" onclick="tab_gallery_click('3');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_4.jpg" onclick="tab_gallery_click('4');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_5.jpg" onclick="tab_gallery_click('5');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_6.jpg" onclick="tab_gallery_click('6');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_7.jpg" onclick="tab_gallery_click('7');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_8.jpg" onclick="tab_gallery_click('8');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_9.jpg" onclick="tab_gallery_click('9');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_10.jpg" onclick="tab_gallery_click('10');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_11.jpg" onclick="tab_gallery_click('11');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_12.jpg" onclick="tab_gallery_click('12');">
+        </div>
+        <div class="tab_column">
+          <img src="directinversion/teaser/gt_13.jpg" onclick="tab_gallery_click('13');">
+        </div>
+      </div>
+      <div class="content has-text-justified">
+        <p>
+          We propose <strong>Direct Inversion</strong>, a simple yet potent inversion solution for diffusion-based editing. The essence of Direct Inversion lies in two primary strategies: (1) disentangle the source and target branches, and (2) empower each branch to excel in its designated role: preservation or editing.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--=================paper Video==========================-->
+<section class="hero is-light is-small">
+  <div class="columns is-centered has-text-centered"  style="margin-top: 10px; margin-bottom: 20px;">
+    <div class="column is-three-fifths">
+      <h2 class="title is-3">Video</h2>
+      
+      <div class="publication-video">
+        <iframe width="560" height="315" src="https://drive.google.com/file/d/1HGr4ETPa7w-08KKOMhfxhngzQ9Y9Nj4H/preview" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      
+      
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./demo_video_v5.mp4"
+                type="video/mp4">
+      </video> -->
+
+    </div>
+  </div>
+</section>
+
+
+<!-- <section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <video id="teaser" autoplay muted loop playsinline height="100%">
+              <source src="./demo_video_v5.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+          <div align="center">
+            <b>Samples generated by ModelScope with or without FreeU.</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<!--=================Abstract==========================-->
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Text-guided diffusion models have revolutionized image generation and editing, offering exceptional realism and diversity. Specifically, in the context of diffusion-based editing, where a source image is edited according to a target prompt, the process commences by acquiring a noisy latent vector corresponding to the source image via the diffusion model. This vector is subsequently fed into separate source and target diffusion branches for editing. The accuracy of this inversion process significantly impacts the final editing outcome, influencing both <strong>essential content preservation</strong> of the source image and <strong>edit fidelity</strong> according to the target prompt. 
+          </p>
+          <p>
+            Prior inversion techniques aimed at finding a unified solution in both the source and target diffusion branches. However, our theoretical and empirical analyses reveal that disentangling these branches leads to a distinct separation of responsibilities for preserving essential content and ensuring edit fidelity. Building on this insight, we introduce "<strong>Direct Inversion</strong>," a novel technique achieving optimal performance of both branches with just three lines of code. To assess image editing performance, we present <strong>PIE-Bench</strong>, an editing benchmark with 700 images showcasing diverse scenes and editing types, accompanied by versatile annotations and comprehensive evaluation metrics. Compared to state-of-the-art optimization-based inversion techniques, our solution not only yields superior performance across 8 editing methods but also achieves nearly an order of speed-up.
+          </p>
+          </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<!--/ Framework. -->
+<section class="section" style="background-color: #f1f1f1;">
+  <div class="container is-max-desktop" style="margin-top:-40px;">
+    <div class="hero-body">
+        <div class="section-title has-text-centered" >
+          <h2 class="title is-3 is-centered">Compare Direction Inversion with Previous Works</h2>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="publication-img">
+              <img id="architecture" src="directinversion/figures/framework.png" style="width:800px; margin-top:10px;margin-bottom:10px;"/>
+            </div>
+          </div>
+        </div>
+        <p>
+          <strong>Comparisons among different inversion methods in diffusion-based editing.</strong> We assume a 2-step diffusion process for illustration. Due to nonexistent of ideal <span style= "background:rgb(255,242,204)">z<sub>2</sub></span>, common practice uses DDIM Inversion to approximate <span style= "background:rgb(255,242,204)">z<sub>t</sub></span>, resulting in <span style= "background:rgb(255,242,204)">z<sub>t</sub><sup>*</sup></span>  with perturbation. Diffusion-based editing methods start from the perturbed noisy latent <span style= "background:rgb(255,242,204)">z<sub>2</sub><sup>*</sup></span> and perform DDIM sampling in a <span style= "background:rgb(222,235,247)">sou</span><span style= "background:rgb(112,168,218)">rce</span> and a <span style= "background:rgb(209,201,206)">tar</span><span style= "background:rgb(178,164,173)">get</span> diffusion branch, further resulting in the <span style= "color:rgb(255,1,98)">distance</span> shown on the figure. Null-Text Inversion and StyleDiffusion optimize a specific latent used in both source and target branches to reduce this distance. Negative-Prompt Inversion assigns the guidance scale to 1 to decrease the distance. In contrast, Direct Inversion disentangles source and target branches in editing. By leaving the target diffusion branch untouched, Direct Inversion retains the edit fidelity. By directly returning the source branch to <span style= "background:rgb(255,242,204)">z<sub>0</sub></span>, Direct Inversion achieves the best possible essential content preservation.
+        </p>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="publication-img">
+              <img id="architecture" src="directinversion/figures/code.png" style="width:800px; margin-top:10px;margin-bottom:10px;"/>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!--=================SD Results==========================-->
+<!-- <section class="section" style="background-color: #f1f1f1;">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Text to Image</h2>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="t2i/sd.png" width="2000">
+          </div>
+          <div align="center">
+            <b>Samples generated by Stabel Diffusion with or without FreeU.</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- Diverse Relations -->
+<section class="section">
+  <div class="container"  style="margin-top:30px;">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">PIE-Bench</h2>
+        <p>PIE-Bench comprises 700 images in natural and artificial scenes (e.g., paintings) featuring ten distinct editing types as shown in the figure. Each image in PIE-Bench includes five annotations: a source image prompt, a target image prompt, an editing instruction, edit subjects describing the main editing body, and the editing mask.</p>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="directinversion/figures/pie.png" width="1000">
+          </div>
+        </div>
+
+        <!-- Supp Long Figures -->
+        <!-- <div id="results-carousel-face" class="carousel results-carousel">
+          <div class="item item-puppet">
+            <div class="carousel-content">
+              <img src="freeu_img_vid/t2i/sd.png"
+                      alt="Puppet."/>
+            </div>
+          </div>
+          <div class="item item-round_bird">
+            <div class="carousel-content">
+              <img src="freeu_img_vid/t2i/sd2.png"
+                      alt="Round-bird."/>
+            </div>
+          </div>
+          <div class="item item-round_sd">
+            <div class="carousel-content">
+              <img src="freeu_img_vid/t2i/sd3.png"
+                      alt="Round-sd."/>
+            </div>
+          </div>
+        </div> -->
+        
+        </div>
+      </div>
+    </div>
+  </div>  
+ 
+</section>
+
+
+
+<!--=================t2v Results==========================-->
+<!-- <section class="section">
+  <div class="container  style="margin-top:30px;">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Text to Video</h2>
+        <h2 class="subtitle has-text-centered">Samples generated by ModelScope with or without FreeU.</h2>
+
+        
+        <div id="results-carousel-face" class="carousel results-carousel">
+          <div class="item item-puppet">
+            <div class="carousel-content">
+              <video id="teaser" autoplay muted loop playsinline height="100%">
+                <source src="./freeu_img_vid/t2v/video1.mp4" 
+                       alt="Puppet."/>
+              </video>
+            </div>
+          </div>
+          <div class="item item-round_bird">
+            <div class="carousel-content">
+              <video id="teaser" autoplay muted loop playsinline height="100%">
+                <source src="./freeu_img_vid/t2v/video2.mp4" 
+                        alt="Round-bird."/>
+              </video>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</section> -->
+
+
+
+<!--=================Quantitative Results==========================-->
+<section class="section" style="background-color: #f1f1f1;">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Quantitative Results</h2>
+        <!-- <h2 class="subtitle has-text-centered">We use eight metrics covering four aspects: structure distance, background preservation, edit prompt-image consistency, and inference time.</h2> -->
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="directinversion/figures/quantitative.png" width="1000">
+          </div>
+        </div>
+        <p><strong>Compare Direct Inversion with other inversion techniques across various editing methods.</strong> For editing method Prompt-to-Prompt (P2P), we compare four different inversion methods: DDIM Inversion (DDIM), Null-Text Inversion (NT), Negative-Prompt Inversion (NP), and StyleDiffusion (StyleD). For editing methods MasaCtrl, Pix2Pix-Zero (P2P-Zero), Plug-and-Play (PnP), we compare with DDIM Inversion (DDIM) following their original setting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--=================Qualitative Results==========================-->
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Qualitative Results</h2>
+        <p> </p>
+        <h2 class="subtitle has-text-centered">Plug-and-Play Feature</h2>
+        <p><strong>Performance enhancement of incorporating Direct Inversion into four diffusion-based editing methods</strong> across various editing categories (from top to bottom): style transfer, object replacement, and color change. The editing prompt is displayed at the top of each row, which includes (a) the source image, the editing results of (b) Prompt-to-Prompt (P2P), (c) MasaCtrl, (d) pix2pix-zero, and (e) plug-and-play. Each set of results is presented: the first column w/o Direct Inversion (Null-text inversion for P2P, DDIM Inversion for the others), and the second column w/ Direct Inversion. Incorporating Direct Inversion into diffusion-based editing methods results in improved image structure preservation (enhancement of the structure distance metric) for full image editing and enhanced background preservation (increased PSNR metric values in the background, i.e., areas that should remain unedited) for foreground editing. The improvements are mostly tangible, and we circle some of the subtle discrepancies w/o Direct Inversion in red.</p>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="directinversion/figures/plug-and-play.png" width="1000">
+          </div>
+        </div>
+        <br/>
+        <h2 class="subtitle has-text-centered">Compare with Different Inversion Techniques</h2>
+        <p><strong>Visulization results of different inversion and editing techniques.</strong> The source image is shown in col (a). We compare (h) Direct Inversion with different inversion techniques added with Prompt-to-Prompt: (b) DDIM Inversion, (c) Null-Text Inversion, (d) Negative-Prompt Inversion, and (e) StyleDiffusion. We also compare model-based editing results: (f) Instruct-Pix2Pix and (g) Blended Latent Diffusion. The improvements are mostly tangible, and we circle some of the subtle discrepancies w/o Direct Inversion in red.</p>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="directinversion\figures\inversion.png" width="1000">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--=================reversion Results==========================-->
+<!-- <section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Relation Inversion</h2>
+        <h2 class="subtitle has-text-centered">Samples generated by ReVersion with or without FreeU.</h2>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="freeu_img_vid/reversion/reversion1.png" width="1000">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+  
+<!--=================Rerender Video==========================-->
+<!-- <section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Personalized Text to Image</h2>
+        <h2 class="subtitle has-text-centered">Samples generated by Rerender with or without FreeU.</h2>
+        <div class="content has-text-justified">
+          <div style="text-align: center; vertical-align:middle">
+            <img src="rerender/rerender1.png" width="800">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="section" style="background-color: #f1f1f1;">
+  <div class="columns is-centered has-text-centered"  style="margin-top: 10px; margin-bottom: 20px;">
+    <div class="column is-three-fifths">
+      <h2 class="title is-3">Video-to-Video</h2>
+      <h2 class="subtitle has-text-centered">Samples generated by Rerender with or without FreeU.</h2>
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./freeu_img_vid/rerender/rerender1.mp4"
+                type="video/mp4">
+      </video>
+
+    </div>
+  </div>
+</section> -->
+    
+
+<section class="section" id="BibTeX" style="background-color: #f1f1f1;">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{ju2023direct,
+  author    = {Ju, Xuan and Zeng, Ailing and Bian, Yuxuan and Liu, Shaoteng and Xu, Qiang},
+  title     = {Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code},
+  journal   = {arXiv preprint arXiv:2304.04269},
+  year      = {2023},
+}</code></pre>
+  </div>
+</section>
+
+  
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+<!--       <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a> -->
+<!--       <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a> -->
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Image Slider Javascripts -->
+<!--=================Functions==========================-->
+<script src="static/js/juxtapose.js"></script>
+
+<script>
+  var slider;
+  let origImages = [
+    { "src": "directinversion/teaser/edit_1.jpg", "label": "Null-Text Inversion", },
+    { "src": "directinversion/teaser/gt_1.jpg", "label": "Direct Inversion", }
+  ];
+  let origOptions = {
+    "makeResponsive": true,
+    "showLabels": true,
+    "mode": "horizontal",
+    "showCredits": true,
+    "animate": true,
+    "startingPosition": "50"
+  };
+
+  const juxtaposeSelector = "#juxtapose-embed";
+  const transientSelector = "#juxtapose-hidden";
+
+  
+  function tab_gallery_click(name) {
+    // Get the expanded image
+    let inputImage = {
+      label: "Null-Text Inversion",
+    };
+    let outputImage = {
+      label: "Direct Inversion",
+    };
+
+    inputImage.src = "directinversion/teaser/".concat("edit_",name, ".jpg")
+    outputImage.src = "directinversion/teaser/".concat("gt_",name, ".jpg")
+
+
+    if(name=="1"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A gold plated bowl filled with <strong style='color:#00aaff';>fruit</strong> → A gold plated bowl filled with <strong style='color:#00aaff';>candy</strong>"
+    }
+    if(name=="2"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "<strong style='color:#00aaff';>Blue</strong> lavender in a blue and white vase → <strong style='color:#00aaff';>Purple</strong> lavender in a blue and white vase"
+    }
+    if(name=="3"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A panda bear <strong style='color:#00aaff';>close his mouth</strong> → A panda bear <strong style='color:#00aaff';>open his mouth</strong>"
+    }
+    if(name=="4"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "Beautiful woman with <strong style='color:#00aaff';>clean</strong> background → Beautiful woman with <strong style='color:#00aaff';>blue</strong> background"
+    }
+    if(name=="5"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A woman with <strong style='color:#00aaff';>gold</strong> makeup → A woman with <strong style='color:#00aaff';>blue</strong> makeup"
+    }
+    if(name=="6"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A dog stands with mouth <strong style='color:#00aaff';>closed</strong>  → A dog stands with mouth <strong style='color:#00aaff';>opened</strong>"
+    }
+    if(name=="7"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "An illustration of a <strong style='color:#00aaff';>cat</strong> sitting on top of a rock → An illustration of a <strong style='color:#00aaff';>bear</strong> sitting on top of a rock"
+    }
+    if(name=="8"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A <strong style='color:#00aaff';>squirrel</strong> is sitting on top of a wooden fence → A <strong style='color:#00aaff';>rabbit</strong> is sitting on top of a wooden fence"
+    }
+    if(name=="9"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A painting of a woman holding <strong style='color:#00aaff';>pink flower</strong> → A painting of a woman holding <strong style='color:#00aaff';>teddy bear</strong>"
+    }
+    if(name=="10"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A woman in a living room → <strong style='color:#00aaff';>Watercolor of</strong> a woman in a living room"
+    }
+    if(name=="11"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A young <strong style='color:#00aaff';>man</strong> with blue eyes → A young <strong style='color:#00aaff';>robot</strong> with blue eyes"
+    }
+    if(name=="12"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A <strong style='color:#00aaff';>cat</strong> sitting on a wooden chair → A <strong style='color:#00aaff';>dog</strong> sitting on a wooden chair"
+    }
+    if(name=="13"){
+      document.getElementById("juxtapose-embed-text").innerHTML = "A <strong style='color:#00aaff';>round</strong> cake with orange frosting on a wooden plate → A <strong style='color:#00aaff';>square</strong> cake with orange frosting on a wooden plate"
+    }
+
+    let images = [inputImage, outputImage];
+    let options = slider.options;
+    options.callback = function (obj) {
+      var newNode = document.getElementById(obj.selector.substring(1));
+      var oldNode = document.getElementById(juxtaposeSelector.substring(1));
+      
+      console.log(obj.selector.substring(1));
+      console.log(newNode.children[0]);
+      oldNode.replaceChild(newNode.children[0], oldNode.children[0]);
+      //newNode.removeChild(newNode.children[0]);
+
+    };
+
+    slider = new juxtapose.JXSlider(transientSelector, images, options);
+  };
+
+  (function () {
+    slider = new juxtapose.JXSlider(
+      juxtaposeSelector, origImages, origOptions);
+    //document.getElementById("left-button").onclick = replaceLeft;
+    //document.getElementById("right-button").onclick = replaceRight;
+  })();
+  // Get the image text
+  var imgText = document.getElementById("imgtext");
+  // Use the same src in the expanded image as the image being clicked on from the grid
+  // expandImg.src = imgs.src;
+  // Use the value of the alt attribute of the clickable image as text inside the expanded image
+  imgText.innerHTML = name;
+  // Show the container element (hidden with CSS)
+  // expandImg.parentElement.style.display = "block";
+
+  $(".flip-card").click(function () {
+    console.log("fading in")
+    div_back = $(this).children().children()[1]
+    div_front = $(this).children().children()[0]
+    // console.log($(this).children("div.flip-card-back"))
+    console.log(div_back)
+    $(div_front).addClass("out");
+    $(div_front).removeClass("in");
+
+    $(div_back).addClass("in");
+    $(div_back).removeClass("out");
+
+  });
+
+  $(".flip-card").mouseleave(function () {
+    console.log("fading in")
+    div_back = $(this).children().children()[1]
+    div_front = $(this).children().children()[0]
+    // console.log($(this).children("div.flip-card-back"))
+    console.log(div_back)
+    $(div_front).addClass("in");
+    $(div_front).removeClass("out");
+
+    $(div_back).addClass("out");
+    $(div_back).removeClass("in");
+
+  });
+</script>
+
+
+</body>
+</html>
+
+

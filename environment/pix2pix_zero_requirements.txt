@@ -1,3 +1,0 @@
-diffusers==0.14.0
-matplotlib
-salesforce-lavis
