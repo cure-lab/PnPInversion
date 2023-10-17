@@ -10,7 +10,7 @@ Keywords: Diffusion Model, Image Inversion, Image Editing
 
 
 <p align="center">
-  <a href="https://idea-research.github.io/DirectInversion/">Project Page</a> |
+  <a href="https://cure-lab.github.io/DirectInversion/">Project Page</a> |
   <a href="https://arxiv.org/abs/2310.01506">Arxiv</a> |
   <a href="https://readpaper.com/paper/4807149696887816193">Readpaper</a> |
   <a href="https://forms.gle/hVMkTABb4uvZVjme9">Benchmark</a> |
