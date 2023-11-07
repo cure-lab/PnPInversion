@@ -53,7 +53,7 @@ if __name__ == "__main__":
     original_prompt = args.original_prompt
     editing_prompt = args.editing_prompt
     image_path = args.image_path
-    blended_word = args.blended_word
+    blended_word = args.blended_word.split(" ") if args.blended_word != "" else []
 
     for edit_method_i in range(len(edit_method_list)):
         edit_method=edit_method_list[edit_method_i]
