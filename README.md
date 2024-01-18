@@ -1,7 +1,7 @@
 # DirectInversion
 
 
-This repository contains the implementation of the paper "Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code" 
+This repository contains the implementation of the ICLR2024 paper "Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code" 
 
 Keywords: Diffusion Model, Image Inversion, Image Editing
 
