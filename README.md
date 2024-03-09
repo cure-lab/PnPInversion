@@ -1,7 +1,7 @@
-# DirectInversion
+# PnPInversion
 
 
-This repository contains the implementation of the ICLR2024 paper "Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code" 
+This repository contains the implementation of the ICLR2024 paper "PnP Inversion: Boosting Diffusion-based Editing with 3 Lines of Code" 
 
 Keywords: Diffusion Model, Image Inversion, Image Editing
 
@@ -42,7 +42,7 @@ Keywords: Diffusion Model, Image Inversion, Image Editing
 
 Text-guided diffusion models revolutionize image generation and editing, offering exceptional realism and diversity. Specifically, in the context of diffusion-based editing, common practice begins with a source image and a target prompt for editing. It involves obtaining a noisy latent vector corresponding to the source image using the diffusion model, which is then supplied to separate source and target diffusion branches for editing. The accuracy of this inversion process significantly impacts the final editing outcome, influencing both *essential content preservation* of the source image and *edit fidelity* according to the target prompt. 
 
-Previous inversion techniques attempted to find a unified solution in both the source and target diffusion branches. However, theoretical and empirical analysis shows that, in fact, a disentangling of the two branches leads to a clear separation of the responsibility for essential content preservation and edit fidelity, thus leading to better results in both aspects. In this paper, we introduce a novel technique called “**Direct Inversion**,” which rectifies inversion deviations directly within the source diffusion branch using just three lines of code, while leaving the target diffusion branch unaltered. To systematically evaluate image editing performance, we present **PIE-Bench**, an editing benchmark featuring 700 images with diverse scenes and editing types, complemented by versatile annotations. Our evaluation metrics, with a focus on editability and structure/background preservation, demonstrate the superior edit performance and inference speed of Direct Inversion across eight editing methods compared to five inversion techniques.
+Previous inversion techniques attempted to find a unified solution in both the source and target diffusion branches. However, theoretical and empirical analysis shows that, in fact, a disentangling of the two branches leads to a clear separation of the responsibility for essential content preservation and edit fidelity, thus leading to better results in both aspects. In this paper, we introduce a novel technique called “**PnP Inversion**,” which rectifies inversion deviations directly within the source diffusion branch using just three lines of code, while leaving the target diffusion branch unaltered. To systematically evaluate image editing performance, we present **PIE-Bench**, an editing benchmark featuring 700 images with diverse scenes and editing types, complemented by versatile annotations. Our evaluation metrics, with a focus on editability and structure/background preservation, demonstrate the superior edit performance and inference speed of PnP Inversion across eight editing methods compared to five inversion techniques.
 
 ![outline](scripts/outline.png)
 ![code](scripts/code_sample.png)
@@ -327,7 +327,7 @@ Then, all results in the table 1 will be output in evaluation_result.csv.
 
 <span id="quantitative-results"></span>
 
-Compare Direct Inversion with other inversion techniques across various editing methods:
+Compare PnP Inversion with other inversion techniques across various editing methods:
 
 ![quatitaive](scripts/compare_direct_inversion_with_other_inversion_techniques.png)
 
@@ -339,7 +339,7 @@ More results can be found in the main paper.
 
 
 
-Performance enhancement of incorporating Direct Inversion into four diffusion-based
+Performance enhancement of incorporating PnP Inversion into four diffusion-based
 editing methods:
 ![vis_1](scripts/vis_2.png)
 
@@ -358,10 +358,10 @@ More results can be found in the main paper.
 
 ```
 @article{ju2023direct,
-  title={Direct Inversion: Boosting Diffusion-based Editing with 3 Lines of Code},
+  title={PnP Inversion: Boosting Diffusion-based Editing with 3 Lines of Code},
   author={Ju, Xuan and Zeng, Ailing and Bian, Yuxuan and Liu, Shaoteng and Xu, Qiang},
-  journal={arXiv preprint arXiv:2304.04269},
-  year={2023}
+  journal={International Conference on Learning Representations ({ICLR})},
+  year={2024}
 }
 ```
 
